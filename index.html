@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sagor's Fun Zone 😂</title>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:Arial,sans-serif;
+  color:#fff;text-align:center;
+  background:linear-gradient(135deg,#160b32,#34104c,#101b3e);
+  overflow-x:hidden;
+}
+header{
+  padding:17px 10px;
+  background:#160d2a;
+  border-bottom:2px solid #ffb4e6;
+  position:sticky;top:0;z-index:10;
+}
+header h2{margin:0;color:#ffb4df}
+header p{margin:6px 0 0;font-size:13px}
+nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+nav a{
+  color:white;text-decoration:none;background:#342451;
+  padding:8px 12px;border-radius:20px;font-size:13px
+}
+.hero{padding:35px 16px 25px}
+.hero h1{font-size:34px;color:#ffe082;margin:8px}
+.hero p{line-height:1.8}
+.emoji{font-size:65px;animation:bounce 1.5s infinite}
+@keyframes bounce{50%{transform:translateY(-10px) rotate(5deg)}}
+button{
+  border:0;border-radius:25px;padding:12px 19px;
+  background:linear-gradient(90deg,#ff66b3,#ffb347);
+  color:#271039;font-weight:bold;font-size:15px;
+  cursor:pointer;margin:5px;transition:.2s
+}
+button:active{transform:scale(.94)}
+section{padding:22px 14px;scroll-margin-top:105px}
+h2{color:#ffd6f1}
+.card{
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:20px;padding:20px;margin:13px auto;
+  max-width:500px;box-shadow:0 5px 20px #0003
+}
+#result{
+  min-height:75px;display:flex;align-items:center;
+  justify-content:center;line-height:1.9;font-size:17px;
+  color:#ffe5a3;padding:12px;white-space:pre-line
+}
+.small{font-size:13px;color:#e2d6ff}
+.meter{height:14px;background:#ffffff22;border-radius:20px;overflow:hidden}
+#bar{height:100%;width:20%;background:#ff79c6;transition:width .5s}
+footer{padding:25px;background:#10091e;color:#e6d9ff}
+.heart{
+  position:fixed;bottom:-30px;z-index:20;pointer-events:none;
+  animation:fly 3s linear forwards
+}
+@keyframes fly{
+  to{transform:translateY(-110vh) rotate(360deg);opacity:0}
+}
+#secret{display:none;color:#ffe4a7;line-height:1.9}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>😂 SAGOR'S FUN ZONE 👑</h2>
+  <p>মন খারাপ? হাসির ডোজ নাও!</p>
+  <nav>
+    <a href="#home">🏠 হোম</a>
+    <a href="#jokes">🤣 জোকস</a>
+    <a href="#game">🎮 গেম</a>
+    <a href="#love">💙 বন্ধুত্ব</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="emoji">😎</div>
+  <h1>এই যে সাগর! 🤣</h1>
+  <h3>মন খারাপের মেয়াদ শেষ!</h3>
+  <p>
+    পৃথিবীতে সমস্যা অনেক,<br>
+    কিন্তু তোর মতো পাগল বন্ধু একটাই! 😂<br>
+    চল, একটু হাসাহাসি করি।
+  </p>
+  <button onclick="startFun()">🚀 হাসির দুনিয়ায় ঢুকি!</button>
+</section>
+
+<section id="jokes">
+  <h2>🤣 সাগরের জন্য জোকস</h2>
+  <div class="card">
+    <div class="emoji">🐸</div>
+    <div id="result">বাটনে চাপ দে, সাগর! তোর জন্য জোকস রেডি! 😂</div>
+    <button onclick="nextJoke()">আরেকটা জোকস 🤣</button>
+    <button onclick="compliment()">একটা প্রশংসা 😎</button>
+  </div>
+</section>
+
+<section id="game">
+  <h2>🎮 পাগলামি চ্যালেঞ্জ</h2>
+  <div class="card">
+    <div class="emoji" id="gameEmoji">🤔</div>
+    <p id="challenge">তুই কতটা পাগল, সেটা পরীক্ষা করবি?</p>
+    <button onclick="newChallenge()">চ্যালেঞ্জ দে! 🔥</button>
+    <button onclick="completeChallenge()">করে ফেলেছি! 😁</button>
+    <p id="score">পাগলামি পয়েন্ট: ০</p>
+  </div>
+</section>
+
+<section id="mood">
+  <h2>🌈 সাগরের মুড মিটার</h2>
+  <div class="card">
+    <p>আজ তোর মুড কতটা ভালো?</p>
+    <div class="meter"><div id="bar"></div></div>
+    <h3 id="moodText">মুড: একটু মেঘলা ☁️</h3>
+    <button onclick="boostMood()">মুড বাড়াই! 🚀</button>
+  </div>
+</section>
+
+<section id="love">
+  <h2>💙 বন্ধুর জন্য স্পেশাল মেসেজ</h2>
+  <div class="card">
+    <div class="emoji">🫂</div>
+    <p style="line-height:1.9">
+      প্রিয় সাগর,<br>
+      তুই শুধু বন্ধু না, তুই একটা আস্ত বিনোদন কেন্দ্র! 😂
+    </p>
+    <button onclick="showSecret()">💌 গোপন চিঠি খুল</button>
+    <div id="secret">
+      শোন পাগলা! ❤️<br>
+      সব দিন একরকম যায় না। কোনো দিন মন খারাপ
+      হতেই পারে। সবসময় হাসতে হবে এমনও না।
+      তোর কথা শোনার জন্য তোর বন্ধু আছে।
+      দরকার হলে মন খুলে বলিস।<br><br>
+      আর হ্যাঁ, তোর মতো বন্ধুকে সহ্য করার জন্য
+      আমাকে একটা পুরস্কার দেওয়া উচিত! 🏆😂<br><br>
+      তুই একা না, বন্ধু! 🫂
+    </div>
+  </div>
+</section>
+
+<footer>
+  <h3>👑 সাগর, তুই বস!</h3>
+  <p>হাসিস, ভালো থাকিস, নিজের যত্ন নিস। ❤️</p>
+  <p class="small">Made with ❤️ by your best friend</p>
+  <button onclick="sendHearts()">❤️ ভালোবাসা পাঠা</button>
+</footer>
+
+<script>
+const jokes = [
+  "শিক্ষক: সাগর, হোমওয়ার্ক করিসনি কেন?\nসাগর: স্যার, খাতা খুলতেই ঘুম এসে গেল! 😂",
+  "বন্ধু: তোর জীবনের লক্ষ্য কী?\nসাগর: বিছানায় শুয়ে শুয়ে সফল হওয়া! 🛌🤣",
+  "ডাক্তার: আপনার বিশ্রাম দরকার।\nসাগর: তাহলে স্কুলে একটা চিঠি লিখে দেন! 😂",
+  "বন্ধু: তুই এত চুপচাপ কেন?\nসাগর: মাথায় অনেক চিন্তা!\nবন্ধু: কী চিন্তা?\nসাগর: আজ কী খাব! 🍕🤣",
+  "সাগরের ব্রেইন: চল পড়তে বসি!\nসাগরের হাত: আগে ফোনটা দেখি!\n৩ ঘণ্টা পর: পড়া গেল তেল আনতে! 📱😂",
+  "বন্ধু: তুই কি খুব বুদ্ধিমান?\nসাগর: অবশ্যই!\nবন্ধু: প্রমাণ কী?\nসাগর: এই প্রশ্নের উত্তর পরে দেব! 😎"
+];
+
+const compliments = [
+  "তুই ভালো বন্ধু, এটা কোনো জোকস না! ❤️",
+  "তোর হাসিটা আবার ফিরে আসুক! 😁",
+  "তুই যতটা ভাবিস, তার চেয়ে বেশি মূল্যবান। 💙",
+  "সাগর নাম, কিন্তু তোর পাগলামির গভীরতা মহাসাগর! 🌊😂",
+  "তোর মতো বন্ধুর সঙ্গে বিরক্ত হওয়াও একটা প্রতিভা! 🤣"
+];
+
+const challenges = [
+  "১০ সেকেন্ডের জন্য নিজের সবচেয়ে মজার মুখটা কর! 😜",
+  "একটা মজার প্রাণীর ডাক নকল কর! 🐒",
+  "নিজের নাম দিয়ে একটা হাসির ছড়া বানাস! ✍️",
+  "এক মিনিট ফোন রেখে একটু হাঁটাহাঁটি কর! 🚶",
+  "একজন বন্ধুকে একটা ভালো কথা বল! 💙",
+  "নিজের সবচেয়ে হাসির স্মৃতিটা মনে কর! 😂"
+];
+
+let score = 0;
+let mood = 20;
+let lastJoke = -1;
+let currentChallenge = -1;
+
+function pickRandom(arr, last = -1) {
+  if (arr.length === 1) return 0;
+  let n;
+  do { n = Math.floor(Math.random() * arr.length); }
+  while (n === last);
+  return n;
+}
+
+function startFun() {
+  document.getElementById("jokes").scrollIntoView();
+  nextJoke();
+  sendHearts();
+}
+
+function nextJoke() {
+  lastJoke = pickRandom(jokes, lastJoke);
+  document.getElementById("result").textContent = jokes[lastJoke];
+}
+
+function compliment() {
+  const n = Math.floor(Math.random() * compliments.length);
+  document.getElementById("result").textContent = compliments[n];
+}
+
+function newChallenge() {
+  currentChallenge = pickRandom(challenges, currentChallenge);
+  document.getElementById("challenge").textContent =
+    challenges[currentChallenge];
+  document.getElementById("gameEmoji").textContent = "🔥";
+}
+
+function completeChallenge() {
+  if (currentChallenge === -1) {
+    document.getElementById("challenge").textContent =
+      "আগে একটা চ্যালেঞ্জ নে, বস! 😂";
+    return;
+  }
+  score += 10;
+  document.getElementById("score").textContent =
+    "পাগলামি পয়েন্ট: " + score + " 🏆";
+  document.getElementById("challenge").textContent =
+    "ওস্তাদ! চ্যালেঞ্জ শেষ! তুই আসলেই লিজেন্ড! 🤣";
+  currentChallenge = -1;
+  sendHearts();
+}
+
+function boostMood() {
+  mood = Math.min(100, mood + 20);
+  document.getElementById("bar").style.width = mood + "%";
+
+  let text = mood < 40 ? "মুড: একটু মেঘলা ☁️"
+    : mood < 70 ? "মুড: রোদ উঠছে! 🌤️"
+    : mood < 100 ? "মুড: জমে গেছে! 😁"
+    : "মুড: হাসির রাজা! 👑😂";
+
+  document.getElementById("moodText").textContent = text;
+
+  if (mood === 100) {
+    document.getElementById("result").textContent =
+      "সাগর, তোর হাসি ফিরে আসুক! 👑❤️";
+    sendHearts();
+  }
+}
+
+function showSecret() {
+  const el = document.getElementById("secret");
+  el.style.display = "block";
+  el.scrollIntoView({behavior:"smooth", block:"center"});
+}
+
+function sendHearts() {
+  const symbols = ["💖","😂","💙","✨","🎉","❤️"];
+  for (let i = 0; i < 18; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+    h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = (20+Math.random()*20) + "px";
+    h.style.animationDelay = Math.random() + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
+  }
+}
+</script>
+
+</body>
+    </html>
